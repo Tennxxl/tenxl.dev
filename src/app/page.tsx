@@ -338,31 +338,31 @@ export default function Home() {
         </MotionDiv>
         <div className="flex flex-col md:flex-row justify-center items-center -mt-12 gap-8 md:gap-16">
           <MotionDiv className="w-full md:w-[25%] flex flex-col justify-center items-center gap-4 scale-[0.8]" delay={0.1}>
-            <TiltCard className="w-full relative group">
-              <div style={{ transform: "translateZ(50px)" }} className="top-0 left-0 w-[50%] md:w-full min-h-54 relative">
-                <Image src={christmasMasolorejtek} alt="CloudClient" className="absolute bottom-0 left-10 w-48 aspect-video object-cover z-10 rotate-[7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
-                <Image src={pizzataxiWebsite} alt="PizzaTaxi" className="absolute bottom-0 right-10 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
-            </div>
+            <TiltCard className="w-full relative group flex justify-center items-center">
+              <div style={{ transform: "translateZ(50px)" }} className="top-0 w-[50%] md:w-full min-h-54 relative flex justify-center items-center">
+                <Image src={christmasMasolorejtek} alt="CloudClient" className="absolute bottom-0 left-4 w-48 aspect-video object-cover z-10 rotate-[7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
+                <Image src={pizzataxiWebsite} alt="PizzaTaxi" className="absolute bottom-0 right-4 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
+              </div>
             </TiltCard>
             <h3 className="text-3xl md:text-5xl text-fancy font-bold tracking-subtitle pr-1 mt-4 pb-2 relative z-20">Weboldalak</h3>
           </MotionDiv>
           
           <MotionDiv className="w-full md:w-[25%] flex flex-col justify-center items-center gap-4 scale-[0.8]" delay={0.2}>
-            <TiltCard className="w-full relative group">
-              <div style={{ transform: "translateZ(50px)" }} className="top-0 left-0 w-[50%] md:w-full min-h-54 relative">
-                <Image src={zetsuImage} alt="Discord Bot" className="absolute bottom-0 left-10 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
-                <Image src={azurlatvanyImage} alt="Discord Bot" className="absolute bottom-0 right-10 w-48 aspect-video object-cover z-10 rotate-[7deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
-            </div>
+            <TiltCard className="w-full relative group flex justify-center items-center">
+              <div style={{ transform: "translateZ(50px)" }} className="top-0 w-[50%] md:w-full min-h-54 relative flex justify-center items-center">
+                <Image src={zetsuImage} alt="Discord Bot" className="absolute bottom-0 left-4 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
+                <Image src={azurlatvanyImage} alt="Discord Bot" className="absolute bottom-0 right-4 w-48 aspect-video object-cover z-10 rotate-[7deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
+              </div>
             </TiltCard>
             <h3 className="text-3xl md:text-5xl text-fancy font-bold tracking-subtitle pr-1 pb-2 mt-4 relative z-20">Programozás</h3>
           </MotionDiv>
 
           <MotionDiv className="w-full md:w-[25%] flex flex-col justify-center items-center gap-4 scale-[0.8]" delay={0.3}>
-            <TiltCard className="w-full relative group">
-              <div style={{ transform: "translateZ(50px)" }} className="top-0 left-0 w-[50%] md:w-full min-h-54 relative">
-                <Image src={discordBanner} alt="Grafika" className="absolute bottom-0 left-10 w-48 aspect-video object-cover z-10 md:rotate-[-17deg] rotate-[27deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
-                <Image src={loadingScreen} alt="Grafika" className="absolute bottom-0 right-10 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
-            </div>
+            <TiltCard className="w-full relative group flex justify-center items-center">
+              <div style={{ transform: "translateZ(50px)" }} className="top-0 w-[50%] md:w-full min-h-54 relative flex justify-center items-center">
+                <Image src={discordBanner} alt="Grafika" className="absolute bottom-0 left-4 w-48 aspect-video object-cover z-10 md:rotate-[-17deg] rotate-[27deg] rounded-2xl border-4 border-white -translate-y-10 shadow-slight transition-transform duration-500 group-hover:scale-110" />
+                <Image src={loadingScreen} alt="Grafika" className="absolute bottom-0 right-4 w-48 aspect-video object-cover rotate-[-7deg] rounded-2xl border-4 border-white shadow-slight transition-transform duration-500 group-hover:scale-110" />
+              </div>
             </TiltCard>
             <h3 className="text-3xl md:text-5xl text-fancy font-bold tracking-subtitle pr-1 mt-4 pb-2 relative z-20">Grafika</h3>
           </MotionDiv>
