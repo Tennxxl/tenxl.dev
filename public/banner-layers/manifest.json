@@ -1,0 +1,123 @@
+{
+  "width": 1100,
+  "height": 440,
+  "layers": [
+    {
+      "file": "00-layer-0.png",
+      "name": "Layer 0",
+      "left": 0,
+      "top": 0,
+      "w": 1100,
+      "h": 440,
+      "kb": 3
+    },
+    {
+      "file": "01-modern-abstract-grid-background-template-black-and-white-square-grid-design-vector.png",
+      "name": "modern-abstract-grid-background-template-black-and-white-square-grid-design-vector",
+      "left": -6,
+      "top": -117,
+      "w": 1198,
+      "h": 674,
+      "kb": 34
+    },
+    {
+      "file": "02-adobe-after-effects-cc-icon-svg.png",
+      "name": "Adobe_After_Effects_CC_icon.svg",
+      "left": 454,
+      "top": 139,
+      "w": 87,
+      "h": 78,
+      "kb": 10
+    },
+    {
+      "file": "03-adobe-photoshop-cc-icon-svg.png",
+      "name": "Adobe_Photoshop_CC_icon.svg",
+      "left": 593,
+      "top": 137,
+      "w": 89,
+      "h": 79,
+      "kb": 11
+    },
+    {
+      "file": "04-tenxl.png",
+      "name": "TENXL",
+      "left": 230,
+      "top": 122,
+      "w": 600,
+      "h": 192,
+      "kb": 14
+    },
+    {
+      "file": "05-tenxl.png",
+      "name": "TENXL",
+      "left": 231,
+      "top": 122,
+      "w": 600,
+      "h": 192,
+      "kb": 56
+    },
+    {
+      "file": "06-layer.png",
+      "name": "‎ ",
+      "left": -64,
+      "top": -190,
+      "w": 1932,
+      "h": 1087,
+      "kb": 131
+    },
+    {
+      "file": "07-nax.png",
+      "name": "NAX",
+      "left": 588,
+      "top": 71,
+      "w": 2032,
+      "h": 1888,
+      "kb": 35
+    },
+    {
+      "file": "08-nax.png",
+      "name": "NAX",
+      "left": -1424,
+      "top": -1538,
+      "w": 2193,
+      "h": 1998,
+      "kb": 41
+    },
+    {
+      "file": "09-designer-developer.png",
+      "name": "designer & developer",
+      "left": 578,
+      "top": 240,
+      "w": 167,
+      "h": 35,
+      "kb": 11
+    },
+    {
+      "file": "10-layer-2.png",
+      "name": "Layer 2",
+      "left": -29,
+      "top": 332,
+      "w": 324,
+      "h": 136,
+      "kb": 5
+    },
+    {
+      "file": "11-images-2.png",
+      "name": "images (2)",
+      "left": 715,
+      "top": 262,
+      "w": 40,
+      "h": 35,
+      "kb": 5
+    },
+    {
+      "file": "12-layer-3.png",
+      "name": "Layer 3",
+      "left": 804,
+      "top": -18,
+      "w": 324,
+      "h": 136,
+      "kb": 6
+    }
+  ]
+}
