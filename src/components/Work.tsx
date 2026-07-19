@@ -37,7 +37,9 @@ export default function Work() {
           </h2>
         </div>
         <a
-          href="#contact"
+          href="https://discord.com/users/1081084405260496937"
+          target="_blank"
+          rel="noopener noreferrer"
           style={css(
             "font-size:17px; font-weight:500; color:#6b6b6b; border-bottom:1px solid #e6e6e6; padding-bottom:3px; transition:color .2s, border-color .2s;"
           )}

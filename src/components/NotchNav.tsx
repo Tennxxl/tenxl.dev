@@ -9,9 +9,21 @@ export default function NotchNav() {
       )}
     >
       <div
+        aria-hidden="true"
+        style={css(
+          "position:absolute; top:0; left:-11px; width:12px; height:12px; background:radial-gradient(circle 12px at 0 100%, transparent 11px, #000 11.5px); pointer-events:none;"
+        )}
+      />
+      <div
+        aria-hidden="true"
+        style={css(
+          "position:absolute; top:0; right:-11px; width:12px; height:12px; background:radial-gradient(circle 12px at 100% 100%, transparent 11px, #000 11.5px); pointer-events:none;"
+        )}
+      />
+      <div
         id="notch"
         style={css(
-          "position:relative; height:32px; width:210px; background:#000; border-radius:0 0 20px 20px; overflow:hidden; cursor:pointer; box-shadow:0 8px 26px rgba(0,0,0,.34); transition:width .55s cubic-bezier(.34,1.45,.5,1), height .55s cubic-bezier(.34,1.45,.5,1), border-radius .5s ease;"
+          "position:relative; height:32px; width:210px; background:#000; border-radius:0 0 20px 20px; overflow:hidden; cursor:pointer; box-shadow:0 8px 26px rgba(0,0,0,.34); transition:width .65s cubic-bezier(.32,.72,0,1), height .65s cubic-bezier(.32,.72,0,1), border-radius .5s cubic-bezier(.32,.72,0,1), box-shadow .4s ease;"
         )}
       >
         <div

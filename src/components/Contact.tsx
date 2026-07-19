@@ -43,7 +43,9 @@ export default function Contact() {
           )}
         >
           <a
-            href="mailto:tenxl@pm.me"
+            href="https://discord.com/users/1081084405260496937"
+            target="_blank"
+            rel="noopener noreferrer"
             style={css(
               "display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#fff; padding:16px 30px; border-radius:50px; font-size:16px; font-weight:500; letter-spacing:0.03em; box-shadow:0 12px 30px rgba(71,142,255,.36); transition:transform .25s, box-shadow .25s, background .25s;"
             )}

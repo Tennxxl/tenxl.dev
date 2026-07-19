@@ -6,6 +6,7 @@ import Work from "@/components/Work";
 import Vfx from "@/components/Vfx";
 import Gfx from "@/components/Gfx";
 import About from "@/components/About";
+import Youtube from "@/components/Youtube";
 import Contact from "@/components/Contact";
 import DiscordCard from "@/components/DiscordCard";
 import Footer from "@/components/Footer";
@@ -21,8 +22,9 @@ export default function Home() {
       <Vfx />
       <Gfx />
       <About />
-      <Contact />
+      <Youtube />
       <DiscordCard />
+      <Contact />
       <Footer />
       <div style={css("height:150px;")} />
       <Effects />

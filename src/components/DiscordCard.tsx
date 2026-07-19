@@ -12,7 +12,11 @@ type Spotify = {
   album_art_url: string;
   timestamps: { start: number; end: number };
 };
-type Lanyard = { listening_to_spotify: boolean; spotify: Spotify | null };
+type Lanyard = {
+  listening_to_spotify: boolean;
+  spotify: Spotify | null;
+  discord_user?: { avatar?: string | null };
+};
 
 function fmt(ms: number) {
   if (!isFinite(ms) || ms < 0) ms = 0;
@@ -23,6 +27,7 @@ function fmt(ms: number) {
 
 export default function DiscordCard() {
   const [sp, setSp] = useState<Spotify | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -34,6 +39,11 @@ export default function DiscordCard() {
         if (alive && j.success) {
           const d = j.data as Lanyard;
           setSp(d.listening_to_spotify ? d.spotify : null);
+          if (d.discord_user?.avatar) {
+            setAvatar(
+              `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${d.discord_user.avatar}.png?size=256`
+            );
+          }
         }
       } catch {
         /* ignore */
@@ -99,7 +109,7 @@ export default function DiscordCard() {
               <div style={css("position:relative; width:84px; height:84px; flex:none;")}>
                 <div style={css("width:84px; height:84px; border-radius:50%; border:6px solid #232428; overflow:hidden; background:#15161a;")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/discord-avatar.png" alt="Tenxl" style={css("width:100%; height:100%; object-fit:cover; display:block;")} />
+                  <img src={avatar ?? "/discord-avatar.png"} alt="Tenxl" style={css("width:100%; height:100%; object-fit:cover; display:block;")} />
                 </div>
                 <div
                   style={css(

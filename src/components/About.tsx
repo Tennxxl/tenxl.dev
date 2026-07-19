@@ -1,6 +1,6 @@
 import { css } from "@/lib/css";
 
-const services = ["Motion Design", "Brand Animation", "3D & CGI", "UI & Product Motion"];
+const services = ["VFX & GFX Design", "Discord Bots", "Web Development", "Travel Films"];
 
 export default function About() {
   return (
@@ -37,8 +37,8 @@ export default function About() {
             <div style={css("position:relative; z-index:1; width:100%; aspect-ratio:4/5; border-radius:36px; overflow:hidden; background:#141414;")}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/about-photo.jpg"
-                alt="Tenxl on the slopes"
+                src="/about-photo-nyc.jpg"
+                alt="Tenxl above Manhattan at night"
                 loading="lazy"
                 style={css("position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;")}
               />
@@ -48,8 +48,8 @@ export default function About() {
                 )}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`https://emojicdn.elk.sh/${encodeURIComponent("⛷️")}?style=apple`} alt="" style={css("width:16px; height:16px; display:block;")} />{" "}
-                Somewhere up a mountain
+                <img src={`https://emojicdn.elk.sh/${encodeURIComponent("🗽")}?style=apple`} alt="" style={css("width:16px; height:16px; display:block;")} />{" "}
+                NYC, Manhattan
               </div>
               <div style={css("position:absolute; right:20px; bottom:18px; width:10px; height:10px; border-radius:50%; background:var(--accent);")} />
             </div>

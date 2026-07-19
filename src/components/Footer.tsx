@@ -1,6 +1,12 @@
 import { css } from "@/lib/css";
 
-const socials = ["YouTube", "Discord", "Instagram", "X"];
+const socials = [
+  { label: "YouTube", href: "https://www.youtube.com/@shotbytenxl" },
+  { label: "Discord", href: "https://discord.gg/aUjRguhKTJ" },
+  { label: "BuiltByBit", href: "https://builtbybit.com/resources/voidguard-all-in-one-discord-bot.103928/" },
+  { label: "tenxl.dev", href: "https://tenxl.dev/" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Footer() {
   return (
@@ -22,8 +28,15 @@ export default function Footer() {
         )}
       >
         {socials.map((s) => (
-          <a key={s} href="#work" style={css("transition:color .2s;")} data-hover="color:var(--accent)">
-            {s}
+          <a
+            key={s.label}
+            href={s.href}
+            target={s.href.startsWith("#") ? undefined : "_blank"}
+            rel={s.href.startsWith("#") ? undefined : "noopener noreferrer"}
+            style={css("transition:color .2s;")}
+            data-hover="color:var(--accent)"
+          >
+            {s.label}
           </a>
         ))}
       </div>
