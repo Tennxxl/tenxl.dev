@@ -1,0 +1,12 @@
+@model List<string>
+@{
+    ViewData["Title"] = "Egyedi játékcímek";
+}
+
+<h1>Egyedi játék címek</h1>
+<ul>
+    @foreach (var title in Model)
+    {
+        <li>@title</li>
+    }
+</ul>

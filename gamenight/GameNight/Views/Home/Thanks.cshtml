@@ -1,0 +1,20 @@
+@model GameSuggestion
+@{
+    ViewData["Title"] = "Köszönjük";
+}
+
+<h1>Köszönjük, @Model.Name!</h1>
+<p>A játékajánlásodat sikeresen rögzítettük.</p>
+
+@if (Model.HasGame)
+{
+    <p>Szuper! Ne felejtsd el magaddal hozni a játékot!</p>
+}
+else
+{
+    <p>Ne aggódj, ha nincs még játékod! A játékest remek alkalom lesz arra, hogy új játékokat próbálj ki és találkozz más játékosokkal.</p>
+}
+<p>
+    <a asp-action="Details" asp-route-id="@Model.Id">Az ajánlás adatlapja</a> ·
+    <a asp-action="ListSuggestions">Vissza a katalógushoz</a>
+</p>

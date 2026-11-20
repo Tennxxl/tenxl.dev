@@ -1,0 +1,9 @@
+@model string?
+@if (string.IsNullOrEmpty(Model))
+{
+    <span class="text-muted">Nincs megadva</span>
+}
+else
+{
+    <span class="badge bg-info text-dark">@Model</span>
+}

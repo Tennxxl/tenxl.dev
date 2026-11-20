@@ -1,0 +1,12 @@
+@model GameSuggestion
+@{
+    ViewData["Title"] = "Archiválás megerősítése";
+}
+
+<h1>Archiválás megerősítése</h1>
+<p>Biztosan archiválod a(z) <strong>@Model.GameTitle</strong> ajánlást? Az archivált ajánlás kikerül a katalógusból, de az archívumból bármikor visszaállítható.</p>
+
+<form asp-action="Archive" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-warning">Archiválás</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Mégse</a>
+</form>

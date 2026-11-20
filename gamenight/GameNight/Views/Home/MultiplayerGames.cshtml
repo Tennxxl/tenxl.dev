@@ -1,0 +1,31 @@
+@model IEnumerable<GameSuggestion>
+@{
+    ViewData["Title"] = "Többjátékos játékok";
+}
+
+<h1>Többjátékos játékok (legalább 4 játékos)</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Játék címe</th>
+                <th>Műfaj</th>
+                <th>Játékosok száma</th>
+                <th>Elérhetőség</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var suggestion in Model)
+            {
+                <tr>
+                    <td>@suggestion.Name</td>
+                    <td><a asp-action="Details" asp-route-id="@suggestion.Id">@suggestion.GameTitle</a></td>
+                    <td>@suggestion.Genre</td>
+                    <td>@suggestion.PlayerCount</td>
+                    <td><partial name="_AvailabilityBadge" model="suggestion.HasGame" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,115 @@
+@model EventDetailsViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h1>@Model.Title</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Játék</dt>
+    <dd class="col-sm-9"><a asp-controller="Home" asp-action="Details" asp-route-id="@Model.GameSuggestionId">@Model.GameTitle</a></dd>
+    <dt class="col-sm-3">Időpont (budapesti idő)</dt>
+    <dd class="col-sm-9">@HungarianTime.Format(Model.StartsAtUtc)</dd>
+    <dt class="col-sm-3">Helyszín</dt>
+    <dd class="col-sm-9">@Model.Location</dd>
+    <dt class="col-sm-3">Kapacitás</dt>
+    <dd class="col-sm-9">@Model.Capacity fő</dd>
+    <dt class="col-sm-3">Állapot</dt>
+    <dd class="col-sm-9">
+        @if (Model.Status == EventStatus.Cancelled)
+        {
+            <span class="badge bg-danger">Lemondva</span>
+        }
+        else
+        {
+            <span class="badge bg-primary">Tervezett</span>
+        }
+    </dd>
+</dl>
+
+<p>
+    <a asp-action="Index" class="btn btn-outline-secondary">Vissza az eseményekhez</a>
+    @if (Model.IsOpen)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Szerkesztés</a>
+    }
+</p>
+
+<section id="participation" class="border">
+    <div class="p-3">
+        <h2 class="h4">Jelentkezés</h2>
+
+        @if (Model.NewRegistrationStatus != null)
+        {
+            <div class="alert alert-success" role="status">
+                <strong>@Model.NewRegistrationStatus</strong>
+                @if (Model.NewWithdrawalCode != null)
+                {
+                    <p class="mb-1 mt-2">
+                        Ezzel a kezelőkóddal tudod később visszavonni a jelentkezésedet. <strong>Jegyezd fel,</strong>
+                        mert csak most látható, később nem kérhető le:
+                    </p>
+                    <p class="mb-0"><code class="fs-5 user-select-all">@Model.NewWithdrawalCode</code></p>
+                }
+            </div>
+        }
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <p>
+            <span class="badge bg-success">Igazolt: @Model.ConfirmedCount</span>
+            <span class="badge bg-warning text-dark">Várólistán: @Model.WaitlistedCount</span>
+            <span class="badge bg-secondary">Szabad hely: @Model.FreeSeats</span>
+        </p>
+
+        @if (Model.IsOpen)
+        {
+            <form asp-action="Register" asp-route-id="@Model.Id" method="post" class="mb-4">
+                <h3 class="h5">Jelentkezem</h3>
+                @if (Model.FreeSeats == 0)
+                {
+                    <p class="text-muted">Az esemény megtelt, a jelentkezők a várólistára kerülnek.</p>
+                }
+                <div class="mb-3">
+                    <label asp-for="Register.DisplayName" class="form-label"></label>
+                    <input asp-for="Register.DisplayName" class="form-control" />
+                    <span asp-validation-for="Register.DisplayName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Register.Email" class="form-label"></label>
+                    <input asp-for="Register.Email" type="email" class="form-control" />
+                    <span asp-validation-for="Register.Email" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Jelentkezés</button>
+            </form>
+
+            <form asp-action="Withdraw" asp-route-id="@Model.Id" method="post">
+                <h3 class="h5">Jelentkezés visszavonása</h3>
+                <p class="text-muted">Add meg a jelentkezéskor használt e-mail-címet és a jelentkezés után kapott kezelőkódot.</p>
+                <div class="mb-3">
+                    <label asp-for="Withdraw.Email" class="form-label"></label>
+                    <input asp-for="Withdraw.Email" type="email" class="form-control" />
+                    <span asp-validation-for="Withdraw.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Withdraw.Code" class="form-label"></label>
+                    <input asp-for="Withdraw.Code" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Withdraw.Code" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-outline-danger">Visszavonás</button>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-secondary mb-0">
+                @(Model.Status == EventStatus.Cancelled
+                    ? "Ez az esemény le lett mondva, jelentkezni nem lehet."
+                    : "Erre az eseményre már nem lehet jelentkezni.")
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

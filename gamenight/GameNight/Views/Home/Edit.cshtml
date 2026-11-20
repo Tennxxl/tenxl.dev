@@ -1,0 +1,18 @@
+@model SuggestionEditModel
+@{
+    ViewData["Title"] = "Ajánlás szerkesztése";
+}
+
+<h1>Ajánlás szerkesztése</h1>
+<p class="text-muted">Ajánlotta: @Model.RecommendedBy</p>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <partial name="_SuggestionFields" model="Model" />
+    <button type="submit" class="btn btn-primary">Mentés</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Mégse</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

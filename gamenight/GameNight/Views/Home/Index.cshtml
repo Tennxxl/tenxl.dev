@@ -1,0 +1,25 @@
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Főoldal";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Game Night 2026</h1>
+    <p>
+        Hamarosan kezdődik a játékest!<br>
+        Ajánlj egy játékot, amivel szívesen játszanál!
+    </p>
+    <p>
+        Eddig <strong>@Model.SuggestionsCount játékot</strong> ajánlottatok.
+        Ezek közül <strong>@Model.HasGameCount játékot</strong> valaki el is tud hozni.
+    </p>
+    <p>
+        <a asp-action="SuggestGame" class="btn btn-primary">Ajánlok egy játékot!</a>
+        <a asp-controller="Events" asp-action="Index" class="btn btn-outline-primary">Közelgő játékestek</a>
+    </p>
+
+    @if (Model.TopGameTitle != null)
+    {
+        <h2>🏆 A legtöbbször ajánlott játék: @Model.TopGameTitle (@Model.TopGameCount ajánlás)</h2>
+    }
+</div>

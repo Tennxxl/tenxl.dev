@@ -1,0 +1,55 @@
+@model GameEventFormViewModel
+@{
+    ViewData["Title"] = Model.IsEdit ? "Játékest szerkesztése" : "Új játékest";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Games.Any())
+{
+    <div class="alert alert-warning">Nincs aktív, elérhető játékajánlás, amelyhez játékest hozható létre.</div>
+}
+
+<form asp-action="@(Model.IsEdit ? "Edit" : "Create")" asp-route-id="@Model.Id" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="GameSuggestionId" class="form-label"></label>
+        <select asp-for="GameSuggestionId" asp-items="Model.Games" class="form-select">
+            <option value="">Válassz!</option>
+        </select>
+        <span asp-validation-for="GameSuggestionId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartsAtLocal" class="form-label"></label>
+        <input asp-for="StartsAtLocal" type="datetime-local" class="form-control" />
+        <span asp-validation-for="StartsAtLocal" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Capacity" class="form-label"></label>
+        <input asp-for="Capacity" type="number" min="2" max="30" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Mentés</button>
+    @if (Model.IsEdit)
+    {
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Mégse</a>
+    }
+    else
+    {
+        <a asp-action="Index" class="btn btn-outline-secondary">Mégse</a>
+    }
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

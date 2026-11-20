@@ -1,0 +1,40 @@
+@* A felviteli és a szerkesztő űrlap közös mezői. A modell: SuggestionFormBase. *@
+@model SuggestionFormBase
+
+<div class="mb-3">
+    <label asp-for="GameTitle" class="form-label"></label>
+    <input asp-for="GameTitle" class="form-control" />
+    <span asp-validation-for="GameTitle" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Genre" class="form-label"></label>
+    <input asp-for="Genre" class="form-control" />
+    <span asp-validation-for="Genre" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="PlayerCount" class="form-label"></label>
+    <input asp-for="PlayerCount" class="form-control" type="number" min="1" max="100" />
+    <span asp-validation-for="PlayerCount" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="HasGame" class="form-label"></label>
+    <select asp-for="HasGame" class="form-select">
+        <option value="">Válassz!</option>
+        <option value="true">Igen</option>
+        <option value="false">Nem</option>
+    </select>
+    <span asp-validation-for="HasGame" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Platform" class="form-label"></label>
+    <select asp-for="Platform" class="form-select" asp-items="@(Platforms.All.Select(p => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(p, p)))">
+        <option value="">(nincs megadva)</option>
+    </select>
+    <span asp-validation-for="Platform" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Rating" class="form-label"></label>
+    <input asp-for="Rating" class="form-control" type="number" min="1" max="5" />
+    <div class="form-text">1 és 5 közötti egész szám; üresen hagyható.</div>
+    <span asp-validation-for="Rating" class="text-danger"></span>
+</div>

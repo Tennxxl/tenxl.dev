@@ -1,0 +1,65 @@
+@model EventListViewModel
+@{
+    ViewData["Title"] = "Játékestek";
+}
+
+<h1>Játékestek</h1>
+
+<p>
+    @if (Model.ShowAll)
+    {
+        <a asp-action="Index" class="btn btn-outline-secondary">Csak a közelgők</a>
+    }
+    else
+    {
+        <a asp-action="Index" asp-route-all="true" class="btn btn-outline-secondary">Összes esemény megjelenítése</a>
+    }
+    <a asp-action="Create" class="btn btn-primary">Új játékest</a>
+</p>
+
+@if (!Model.Items.Any())
+{
+    <div class="alert alert-info">
+        @(Model.ShowAll ? "Még nincs játékest." : "Nincs közelgő játékest.")
+        <a asp-action="Create">Hozz létre egyet!</a>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Időpont (budapesti idő)</th>
+                    <th>Cím</th>
+                    <th>Játék</th>
+                    <th>Helyszín</th>
+                    <th>Kapacitás</th>
+                    <th>Állapot</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model.Items)
+                {
+                    <tr>
+                        <td>@HungarianTime.Format(e.StartsAtUtc)</td>
+                        <td><a asp-action="Details" asp-route-id="@e.Id">@e.Title</a></td>
+                        <td>@e.GameTitle</td>
+                        <td>@e.Location</td>
+                        <td>@e.Capacity</td>
+                        <td>
+                            @if (e.Status == EventStatus.Cancelled)
+                            {
+                                <span class="badge bg-danger">Lemondva</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary">Tervezett</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

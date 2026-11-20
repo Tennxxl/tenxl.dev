@@ -1,0 +1,22 @@
+@model SuggestionCreateModel
+@{
+    ViewData["Title"] = "Játék ajánlása";
+}
+
+<h1>Játék ajánlása</h1>
+<p>Itt ajánlhatsz egy játékot a közös játékestre.</p>
+
+<form asp-action="SuggestGame" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <partial name="_SuggestionFields" model="Model" />
+    <button type="submit" class="btn btn-primary">Ajánlás beküldése</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

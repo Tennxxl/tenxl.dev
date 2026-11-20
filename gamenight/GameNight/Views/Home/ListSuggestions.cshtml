@@ -1,0 +1,161 @@
+@model CatalogViewModel
+@{
+    ViewData["Title"] = "Katalógus";
+    var currentUrl = Context.Request.Path.Value + Context.Request.QueryString.Value;
+    var minPlayersError = ViewData.ModelState["minPlayers"]?.Errors.FirstOrDefault()?.ErrorMessage;
+    var availableError = ViewData.ModelState["available"]?.Errors.FirstOrDefault()?.ErrorMessage;
+}
+
+<h1>Játékajánlások listája</h1>
+<h2 class="h5 text-muted">
+    @Model.ActiveCount aktív ajánlás van összesen, ebből a szűrésnek <strong>@Model.TotalCount</strong> felel meg.
+</h2>
+
+<form method="get" asp-action="ListSuggestions" class="row g-2 align-items-end mb-3">
+    <div class="col-12 col-md-4">
+        <label for="search" class="form-label">Keresés a címben és a műfajban</label>
+        <input type="text" id="search" name="search" class="form-control" value="@Model.Search" />
+    </div>
+    <div class="col-6 col-md-2">
+        <label for="genre" class="form-label">Műfaj</label>
+        <select id="genre" name="genre" class="form-select">
+            <option value="">Mind</option>
+            @foreach (var g in Model.Genres)
+            {
+                <option value="@g" selected="@(string.Equals(g, Model.Genre, StringComparison.OrdinalIgnoreCase))">@g</option>
+            }
+        </select>
+    </div>
+    <div class="col-6 col-md-2">
+        <label for="minPlayers" class="form-label">Legalább ennyi játékos</label>
+        <input type="text" inputmode="numeric" id="minPlayers" name="minPlayers"
+               class="form-control @(minPlayersError != null ? "is-invalid" : "")" value="@Model.MinPlayersRaw" />
+        @if (minPlayersError != null)
+        {
+            <div class="invalid-feedback d-block">@minPlayersError</div>
+        }
+    </div>
+    <div class="col-6 col-md-2">
+        <label for="available" class="form-label">Elérhetőség</label>
+        <select id="available" name="available" class="form-select @(availableError != null ? "is-invalid" : "")">
+            <option value="all" selected="@(Model.Available == "all")">Mind</option>
+            <option value="true" selected="@(Model.Available == "true")">Elérhető</option>
+            <option value="false" selected="@(Model.Available == "false")">Nem elérhető</option>
+        </select>
+        @if (availableError != null)
+        {
+            <div class="invalid-feedback d-block">@availableError</div>
+        }
+    </div>
+    <div class="col-6 col-md-2">
+        <label for="sort" class="form-label">Rendezés</label>
+        <select id="sort" name="sort" class="form-select">
+            <option value="title_asc" selected="@(Model.Sort == "title_asc")">Cím szerint növekvő</option>
+            <option value="title_desc" selected="@(Model.Sort == "title_desc")">Cím szerint csökkenő</option>
+            <option value="players_asc" selected="@(Model.Sort == "players_asc")">Játékosszám szerint növekvő</option>
+        </select>
+    </div>
+    <div class="col-12">
+        @* Új szűrésnél nincs page paraméter: az első oldal nyílik meg. *@
+        <button type="submit" class="btn btn-primary">Szűrés</button>
+        <a asp-action="ListSuggestions" class="btn btn-outline-secondary">Szűrők törlése</a>
+        <a asp-action="ArchivedSuggestions" class="btn btn-link">Archívum</a>
+    </div>
+</form>
+
+@if (Model.ActiveCount == 0)
+{
+    <div class="alert alert-info">
+        <p class="mb-2">A katalógus még üres, nincs játékajánlás.</p>
+        <a asp-action="SuggestGame" class="btn btn-primary">Ajánlj egy új játékot</a>
+    </div>
+}
+else if (!Model.Items.Any())
+{
+    <div class="alert alert-warning">
+        Nincs a szűrésnek megfelelő ajánlás.
+        <a asp-action="ListSuggestions">Szűrők törlése</a>
+    </div>
+}
+else
+{
+    <p class="text-muted">Megjelenített rekordok: @Model.Items.Count (@Model.Page. oldal / @Model.TotalPages)</p>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Név</th>
+                    <th>Játék címe</th>
+                    <th>Műfaj</th>
+                    <th>Játékosok száma</th>
+                    <th>Elérhetőség</th>
+                    <th>Platform</th>
+                    <th>Értékelés</th>
+                    <th>Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var suggestion in Model.Items)
+                {
+                    <tr>
+                        <td>@suggestion.Name</td>
+                        <td><a asp-action="Details" asp-route-id="@suggestion.Id" asp-route-returnUrl="@currentUrl">@suggestion.GameTitle</a></td>
+                        <td>@suggestion.Genre</td>
+                        <td>@suggestion.PlayerCount</td>
+                        <td><partial name="_AvailabilityBadge" model="suggestion.HasGame" /></td>
+                        <td><partial name="_Platform" model="suggestion.Platform" /></td>
+                        <td><partial name="_Rating" model="suggestion.Rating" /></td>
+                        <td class="text-nowrap">
+                            <a asp-action="Details" asp-route-id="@suggestion.Id" asp-route-returnUrl="@currentUrl" class="btn btn-sm btn-primary">Részletek</a>
+                            <form asp-action="Delete" asp-route-id="@suggestion.Id" method="post" class="d-inline"
+                                  onsubmit="return confirm('Biztosan törlöd az ajánlást?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Törlés</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Lapozó">
+            <ul class="pagination">
+                <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                    <a class="page-link" asp-action="ListSuggestions" asp-all-route-data="Model.RouteValues(Model.Page - 1)">Előző</a>
+                </li>
+                @for (var p = 1; p <= Model.TotalPages; p++)
+                {
+                    <li class="page-item @(p == Model.Page ? "active" : "")">
+                        <a class="page-link" asp-action="ListSuggestions" asp-all-route-data="Model.RouteValues(p)">@p</a>
+                    </li>
+                }
+                <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-action="ListSuggestions" asp-all-route-data="Model.RouteValues(Model.Page + 1)">Következő</a>
+                </li>
+            </ul>
+        </nav>
+    }
+
+    <h2>Játékajánlások műfaj szerint</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Műfaj</th>
+                    <th>Ajánlások száma</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var genre in Model.ByGenre)
+                {
+                    <tr>
+                        <td>@genre.Genre</td>
+                        <td>@genre.Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

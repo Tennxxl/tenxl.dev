@@ -1,0 +1,42 @@
+@model IEnumerable<GameSuggestion>
+@{
+    ViewData["Title"] = "Archívum";
+}
+
+<h1>Archivált ajánlások</h1>
+<p><a asp-action="ListSuggestions">← Vissza a katalógusba</a></p>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Az archívum üres.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Játék címe</th>
+                    <th>Műfaj</th>
+                    <th>Játékosok száma</th>
+                    <th>Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td><a asp-action="Details" asp-route-id="@s.Id">@s.GameTitle</a></td>
+                        <td>@s.Genre</td>
+                        <td>@s.PlayerCount</td>
+                        <td>
+                            <form asp-action="Restore" asp-route-id="@s.Id" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-success">Visszaállítás</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

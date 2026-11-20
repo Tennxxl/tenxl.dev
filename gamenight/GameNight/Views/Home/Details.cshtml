@@ -1,0 +1,47 @@
+@model SuggestionDetailsViewModel
+@{
+    var game = Model.Suggestion;
+    ViewData["Title"] = game.GameTitle;
+}
+
+<h1>Játékajánlás részletei: @game.GameTitle</h1>
+
+@if (game.IsArchived)
+{
+    <div class="alert alert-warning d-flex justify-content-between align-items-center" role="status">
+        <span>Ez az ajánlás archivált, ezért nem szerepel a katalógusban.</span>
+        <form asp-action="Restore" asp-route-id="@game.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-success">Visszaállítás</button>
+        </form>
+    </div>
+}
+
+<dl class="row">
+    <dt class="col-sm-3">Ajánlotta</dt>
+    <dd class="col-sm-9">@game.Name</dd>
+    <dt class="col-sm-3">Cím</dt>
+    <dd class="col-sm-9">@game.GameTitle</dd>
+    <dt class="col-sm-3">Műfaj</dt>
+    <dd class="col-sm-9">@game.Genre</dd>
+    <dt class="col-sm-3">Játékosok száma</dt>
+    <dd class="col-sm-9">@game.PlayerCount</dd>
+    <dt class="col-sm-3">Elérhetőség</dt>
+    <dd class="col-sm-9"><partial name="_AvailabilityBadge" model="game.HasGame" /></dd>
+    <dt class="col-sm-3">Platform</dt>
+    <dd class="col-sm-9"><partial name="_Platform" model="game.Platform" /></dd>
+    <dt class="col-sm-3">Értékelés</dt>
+    <dd class="col-sm-9"><partial name="_Rating" model="game.Rating" /></dd>
+</dl>
+
+<p>
+    <a href="@Model.BackUrl" class="btn btn-outline-secondary">@(game.IsArchived && Model.ReturnUrl == null ? "Vissza az archívumba" : "Vissza a katalógusba")</a>
+    @if (!game.IsArchived)
+    {
+        <a asp-action="Edit" asp-route-id="@game.Id" class="btn btn-primary">Szerkesztés</a>
+        <a asp-action="ArchiveConfirm" asp-route-id="@game.Id" class="btn btn-warning">Archiválás</a>
+        @if (game.HasGame)
+        {
+            <a asp-controller="Events" asp-action="Create" asp-route-gameId="@game.Id" class="btn btn-outline-primary">Új játékest ehhez</a>
+        }
+    }
+</p>

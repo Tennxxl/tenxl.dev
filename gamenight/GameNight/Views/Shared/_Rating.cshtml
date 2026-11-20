@@ -1,0 +1,10 @@
+@model int?
+@if (Model.HasValue)
+{
+    <span class="text-warning" aria-hidden="true">@(new string('★', Model.Value))<span class="text-muted">@(new string('☆', 5 - Model.Value))</span></span>
+    <span>@Model.Value / 5</span>
+}
+else
+{
+    <span class="text-muted">Értékelés nélkül</span>
+}
